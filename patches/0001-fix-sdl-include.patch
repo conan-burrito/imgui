@@ -1,0 +1,15 @@
+diff --git a/examples/imgui_impl_sdl.cpp b/examples/imgui_impl_sdl.cpp
+index 695ac810..633cf684 100644
+--- a/examples/imgui_impl_sdl.cpp
++++ b/examples/imgui_impl_sdl.cpp
+@@ -48,8 +48,8 @@
+ #include "imgui_impl_sdl.h"
+ 
+ // SDL
+-#include <SDL.h>
+-#include <SDL_syswm.h>
++#include <SDL2/SDL.h>
++#include <SDL2/SDL_syswm.h>
+ #if defined(__APPLE__)
+ #include "TargetConditionals.h"
+ #endif
