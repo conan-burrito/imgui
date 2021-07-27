@@ -1,7 +1,7 @@
 name: build
 
 env:
-  CONAN_REFERENCE: "imgui/1.78"
+  CONAN_REFERENCE: "imgui/1.83"
   CONAN_USERNAME: "conan-burrito"
   CONAN_UPLOAD: "https://conan.yobasoft.de"
   CONAN_STABLE_BRANCH_PATTERN: "release/*"

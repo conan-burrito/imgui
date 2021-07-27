@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.8.2)
 set(IMGUI_SOVERSION 1)
 mark_as_advanced(IMGUI_SOVERSION)
 
-set(IMGUI_VERSION 1.78)
+set(IMGUI_VERSION 1.83)
 mark_as_advanced(IMGUI_VERSION)
 
 project(imgui LANGUAGES CXX VERSION ${IMGUI_VERSION})
@@ -18,6 +18,7 @@ add_library(imgui
    src/imgui.cpp
    src/imgui_draw.cpp
    src/imgui_widgets.cpp
+   src/imgui_tables.cpp
 
    $<$<BOOL:IMGUI_DEMO>:src/imgui_demo.cpp>
 )
@@ -55,6 +56,7 @@ macro(add_binding name extension)
 endmacro()
 
 add_binding(allegro5 cpp)
+add_binding(android cpp)
 add_binding(dx9 cpp)
 add_binding(dx10 cpp)
 add_binding(dx11 cpp)
@@ -69,6 +71,7 @@ add_binding(osx mm)
 add_binding(sdl cpp)
 add_binding(vulkan cpp)
 add_binding(win32 cpp)
+add_binding(wgpu cpp)
 
 #
 # Installation
@@ -98,7 +101,7 @@ install(
    TARGETS
       ${IMGUI_BINARIES}
 
-      allegro5 dx9 dx10 dx11 dx12 glfw glut marmelade metal opengl2 opengl3 osx sdl vulkan win32
+      allegro5 dx9 dx10 dx11 dx12 glfw glut marmelade metal opengl2 opengl3 osx sdl vulkan win32 wgpu
 
    EXPORT IMGUI_Targets
 
@@ -118,21 +121,23 @@ install(
       src/imstb_textedit.h
       src/imstb_truetype.h
 
-      src/examples/imgui_impl_allegro5.h
-      src/examples/imgui_impl_dx10.h
-      src/examples/imgui_impl_dx11.h
-      src/examples/imgui_impl_dx12.h
-      src/examples/imgui_impl_dx9.h
-      src/examples/imgui_impl_glfw.h
-      src/examples/imgui_impl_glut.h
-      src/examples/imgui_impl_marmalade.h
-      src/examples/imgui_impl_metal.h
-      src/examples/imgui_impl_opengl2.h
-      src/examples/imgui_impl_opengl3.h
-      src/examples/imgui_impl_osx.h
-      src/examples/imgui_impl_sdl.h
-      src/examples/imgui_impl_vulkan.h
-      src/examples/imgui_impl_win32.h
+      src/backends/imgui_impl_allegro5.h
+      src/backends/imgui_impl_android.h
+      src/backends/imgui_impl_dx10.h
+      src/backends/imgui_impl_dx11.h
+      src/backends/imgui_impl_dx12.h
+      src/backends/imgui_impl_dx9.h
+      src/backends/imgui_impl_glfw.h
+      src/backends/imgui_impl_glut.h
+      src/backends/imgui_impl_marmalade.h
+      src/backends/imgui_impl_metal.h
+      src/backends/imgui_impl_opengl2.h
+      src/backends/imgui_impl_opengl3.h
+      src/backends/imgui_impl_osx.h
+      src/backends/imgui_impl_sdl.h
+      src/backends/imgui_impl_vulkan.h
+      src/backends/imgui_impl_win32.h
+      src/backends/imgui_impl_wgpu.h
 
    DESTINATION
       ${CMAKE_INSTALL_INCLUDEDIR}
@@ -140,21 +145,23 @@ install(
 
 install(
    FILES
-      src/examples/imgui_impl_allegro5.cpp
-      src/examples/imgui_impl_dx10.cpp
-      src/examples/imgui_impl_dx11.cpp
-      src/examples/imgui_impl_dx12.cpp
-      src/examples/imgui_impl_dx9.cpp
-      src/examples/imgui_impl_glfw.cpp
-      src/examples/imgui_impl_glut.cpp
-      src/examples/imgui_impl_marmalade.cpp
-      src/examples/imgui_impl_metal.mm
-      src/examples/imgui_impl_opengl2.cpp
-      src/examples/imgui_impl_opengl3.cpp
-      src/examples/imgui_impl_osx.mm
-      src/examples/imgui_impl_sdl.cpp
-      src/examples/imgui_impl_vulkan.cpp
-      src/examples/imgui_impl_win32.cpp
+      src/backends/imgui_impl_allegro5.cpp
+      src/backends/imgui_impl_android.cpp
+      src/backends/imgui_impl_dx10.cpp
+      src/backends/imgui_impl_dx11.cpp
+      src/backends/imgui_impl_dx12.cpp
+      src/backends/imgui_impl_dx9.cpp
+      src/backends/imgui_impl_glfw.cpp
+      src/backends/imgui_impl_glut.cpp
+      src/backends/imgui_impl_marmalade.cpp
+      src/backends/imgui_impl_metal.mm
+      src/backends/imgui_impl_opengl2.cpp
+      src/backends/imgui_impl_opengl3.cpp
+      src/backends/imgui_impl_osx.mm
+      src/backends/imgui_impl_sdl.cpp
+      src/backends/imgui_impl_vulkan.cpp
+      src/backends/imgui_impl_win32.cpp
+      src/backends/imgui_impl_wgpu.cpp
 
    DESTINATION
       ${CMAKE_INSTALL_DATADIR}

@@ -35,8 +35,7 @@ class Recipe(ConanFile):
         return os.path.join(self.source_folder, 'src')
 
     def source(self):
-        tools.get(**self.conan_data["sources"][self.version])
-        os.rename("{}-{}".format(self.name, self.version), 'src')
+        tools.get(**self.conan_data["sources"][self.version], destination='src', strip_root=True)
         for patch in self.conan_data["patches"][self.version]:
             tools.patch(**patch)
 
