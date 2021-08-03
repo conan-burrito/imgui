@@ -17,7 +17,6 @@ class Recipe(ConanFile):
         'with_demo': [True, False]
     }
     default_options = {'shared': False, 'fPIC': True, 'with_demo': True}
-    build_policy = 'missing'
 
     generators = 'cmake'
     exports_sources = ['patches/*', 'CMakeLists.txt', 'Config.cmake.in']
@@ -62,4 +61,5 @@ class Recipe(ConanFile):
             self.cpp_info.system_libs.append("m")
 
         bin_path = os.path.join(self.package_folder, "bin")
+        self.output.info("Appending PATH env var with : {}".format(bin_path))
         self.env_info.PATH.append(bin_path)

@@ -5,10 +5,6 @@ import os
 class Recipe(ConanFile):
     settings = "os", "compiler", "arch", "build_type"
     generators = "cmake"
-    requires = [
-        'SDL2/2.0.12@conan-burrito/stable',
-        'glad/0.1.33@conan-burrito/stable',
-    ]
 
     def build(self):
         cmake = CMake(self)
@@ -16,7 +12,8 @@ class Recipe(ConanFile):
         cmake.build()
 
     def test(self):
-        if tools.cross_building(self.settings):
-            return
+        if not tools.cross_building(self.settings):
+            self.run(os.path.join("bin", "test"), run_environment=True)
 
-        self.run(os.path.join('bin', 'test'), run_environment=True)
+        if self.settings.os == 'Emscripten':
+            self.run("node %s" % os.path.join("bin", "test"), run_environment=True)
